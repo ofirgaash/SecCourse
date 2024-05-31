@@ -55,7 +55,7 @@ class AEAD_AES_128_CBC_HMAC_SHA_256(AEAD):
             pad_len = data[-1]
             return data[:-(pad_len + 1)]
         except:
-            # print("\nDEBUG: error in pad stripping")
+            print("\nERROR: error in pad stripping")
             exit()
 
     def __pad(self, data):
@@ -127,7 +127,7 @@ class AEAD_AES_128_CBC_HMAC_SHA_256(AEAD):
         if is_valid:
             pass
         else:
-            # print(f"\nDEBUG: invalid padding: \n{p[-16:]} \n{alleged_len} \n{p[-alleged_len:-1]}")
+            print(f"\nERROR: invalid padding: \n{p[-16:]} \n{alleged_len} \n{p[-alleged_len:-1]}")
             exit()
 
         stripped_data = self.__strip_padding(p)
@@ -137,7 +137,7 @@ class AEAD_AES_128_CBC_HMAC_SHA_256(AEAD):
         if (tag == alleged_tag):
             pass
         else:
-            # print(f"\nDEBUG: invalid tag: \n\t{tag} \n\t{alleged_tag}")
+            print(f"\nERROR: invalid tag: \n\t{tag} \n\t{alleged_tag}")
             exit()
 
         return data

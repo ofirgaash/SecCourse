@@ -192,17 +192,20 @@ class RSA_PKCS_1(RSA):
         elif bt == 2:
             oct_before_d = eb.index(b0, 2)
         else:
-            # print(f"\nDEBUG: wrong 'bt' value found while parsing in decryption ({bt})")            
+            print(f"\nERROR: wrong 'bt' value found while parsing in decryption ({bt})")       
+            exit()    
         
         ps, d = eb[2:oct_before_d], eb[oct_before_d+1:]
 
         if len(ps) != self.k - 3 - len(d):
-            # print("\nDEBUG: ambiguous decryption (OR BUG IN CODE!)")
+            print("\nERROR: ambiguous decryption")
+            exit()
         
         if len(ps) < 8 or \
            (bt == 0 and ps != bytes(len(ps))) or \
            (bt == 1 and ps != (255).to_bytes(1, byteorder='big') * len(ps)):
-            # print("\nDEBUG: padding string does not match 'bt'") 
+            print("\nERROR: padding string does not match 'bt'") 
+            exit()
 
         return d
 
