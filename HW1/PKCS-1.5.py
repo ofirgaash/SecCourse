@@ -69,7 +69,7 @@ class RSA(object):
             print('init vars:', k, N)
         if (p is not None) and (q is not None):
             self.phin = (p - 1) * (q - 1)
-            self.d = ?
+            self.d = modinv(self.e, self.phin) # ?
             self.test()
         else:
             self.d = None
@@ -121,8 +121,8 @@ class RSA_PKCS_1(RSA):
             raise Exception("first byte must be nonzero 0 if bt=0")
 
         if ps is None:
-            ps = ?
-        eb = ?  # Encryption Block
+            ps = self.pad(self.k - 3 - len(d)) # ?
+        eb = bytes([0]) + self.bt.to_bytes(1, byteorder='big') + ps + bytes([0]) + d  # ? # Encryption Block
 
         x = int.from_bytes(eb, byteorder='big')  # Conversion to integer
 
@@ -176,7 +176,35 @@ class RSA_PKCS_1(RSA):
         :param eb: encryption block
         :return: parsed data
         """
-        ?
+        # ?
+        # EB = 00 || BT || PS || 00 || D
+        # print(f"\nDEBUG: eb={eb}")
+        b0 = (0).to_bytes(1, byteorder='big')
+        bt = eb[1]
+        oct_before_d = None
+
+        if bt == 0:
+            oct_before_d = 2
+            while eb[oct_before_d+1] == 0:
+                oct_before_d += 1
+        elif bt == 1:
+            oct_before_d = eb.index(b0, 2)
+        elif bt == 2:
+            oct_before_d = eb.index(b0, 2)
+        else:
+            # print(f"\nDEBUG: wrong 'bt' value found while parsing in decryption ({bt})")            
+        
+        ps, d = eb[2:oct_before_d], eb[oct_before_d+1:]
+
+        if len(ps) != self.k - 3 - len(d):
+            # print("\nDEBUG: ambiguous decryption (OR BUG IN CODE!)")
+        
+        if len(ps) < 8 or \
+           (bt == 0 and ps != bytes(len(ps))) or \
+           (bt == 1 and ps != (255).to_bytes(1, byteorder='big') * len(ps)):
+            # print("\nDEBUG: padding string does not match 'bt'") 
+
+        return d
 
 
 if __name__ == "__main__":

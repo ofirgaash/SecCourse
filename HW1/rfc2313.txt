@@ -50,16 +50,6 @@ Overview
              and then the content-encryption key is encrypted
              with the RSA public keys of the recipients of the
              content. The encrypted content and the encrypted
-
-
-
-
-
-Kaliski                      Informational                      [Page 1]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
              content-encryption key are represented together
              according to the syntax in PKCS #7 to yield a
              digital envelope. This application is also
@@ -107,15 +97,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
    RFC 1423  Balenson, D., "Privacy Enhancement for
              Internet Electronic Mail: Part III: Algorithms,
              Modes, and Identifiers," RFC 1423, February 1993.
-
-
-
-
-Kaliski                      Informational                      [Page 2]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
    X.208     CCITT. Recommendation X.208: Specification of
              Abstract Syntax Notation One (ASN.1). 1988.
 
@@ -162,15 +143,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
    [Mil76]   G.L. Miller. Riemann's hypothesis and tests for
              primality. Journal of Computer and Systems
              Sciences, 13(3):300-307, 1976.
-
-
-
-
-
-Kaliski                      Informational                      [Page 3]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
 
    [QC82]    J.-J. Quisquater and C. Couvreur. Fast
              decipherment algorithm for RSA public-key
@@ -220,14 +192,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
    Upper-case symbols (e.g., BT) denote octet strings and bit strings
    (in the case of the signature S); lower-case symbols (e.g., c) denote
    integers.
-
-
-
-Kaliski                      Informational                      [Page 4]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
    ab   hexadecimal octet value  c    exponent
    BT   block type               d    private exponent
    D    data                     e    public exponent
@@ -241,6 +205,7 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
    PS   padding string           mod n  modulo n
    S    signature                X || Y  concatenation of X, Y
                                  ||X||  length in octets of X
+
 5. General overview
 
    The next six sections specify key generation, key syntax, the
@@ -276,14 +241,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
 
    The private exponent shall be a positive integer d such that de-1 is
    divisible by both p-1 and q-1.
-
-
-
-Kaliski                      Informational                      [Page 5]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
    The length of the modulus n in octets is the integer k satisfying
 
                         2^(8(k-1)) <= n < 2^(8k) .
@@ -324,21 +281,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
         o    modulus is the modulus n.
 
         o    publicExponent is the public exponent e.
-
-
-
-
-
-
-
-
-
-
-
-Kaliski                      Informational                      [Page 6]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
 
 7.2 Private-key syntax
 
@@ -387,15 +329,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
              values p, q, d mod (p-1), d mod (p-1), and q-1 mod p is
              intended for efficiency, as Quisquater and Couvreur have
              shown [QC82]. A private-key syntax that does not include
-
-
-
-
-Kaliski                      Informational                      [Page 7]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
              all the extra values can be converted readily to the syntax
              defined here, provided the public key is known, according
              to a result by Miller [Mil76].
@@ -443,15 +376,7 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
              here to data other than an octet string containing a
              message digest is not recommended and is subject to further
              study.
-
-
-
-
-Kaliski                      Informational                      [Page 8]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
+             
         4.   This document may be extended to handle data of
              length more than k-11 octets.
 
@@ -495,18 +420,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
         4.   Block types 01 and 02 are compatible with PEM RSA
              encryption of content-encryption keys and message digests
              as described in RFC 1423.
-
-
-
-
-
-
-
-
-Kaliski                      Informational                      [Page 9]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
 
         5.   For block type 02, it is recommended that the
              pseudorandom octets be generated independently for each
@@ -553,17 +466,7 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
 
    The integer encrypted data y shall be converted to an octet string ED
    of length k, the encrypted data. The encrypted data ED shall satisfy
-
-
-
-
-
-
-Kaliski                      Informational                     [Page 10]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
+   
                                      k
                 y =  SUM  2^(8(k-i)) EDi .              (3)
                                    i = 1
@@ -608,17 +511,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
                        x = y^c mod n,  0 <= x < n .
 
    This is the classic RSA computation.
-
-
-
-
-
-
-
-Kaliski                      Informational                     [Page 11]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
 
 9.3 Integer-to-octet-string conversion
 
@@ -667,15 +559,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
    process determines whether a bit string (the signature) is the
    signature of an octet string (the message).
 
-
-
-
-
-Kaliski                      Informational                     [Page 12]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
    Note. The only difference between the signature algorithms defined
    here and one of the the methods by which signatures (encrypted
    message digests) are constructed in PKCS #7 is that signatures here
@@ -717,20 +600,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
              message-digest algorithm, MD2, MD4 or MD5. For
              reference, the relevant object identifiers are the
              following:
-
-
-
-
-
-
-
-
-
-
-Kaliski                      Informational                     [Page 13]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
 
    md2 OBJECT IDENTIFIER ::=
 
@@ -777,17 +646,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
              "broken" if someone can find a collision: two messages with
              the same digest. While collisions have been found in
              variants of MD4 with only two digesting "rounds"
-
-
-
-
-
-
-Kaliski                      Informational                     [Page 14]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
              [Mer90][dBB92], none have been found in MD4 itself, which
              has three rounds. After further critical review, it may be
              appropriate to consider MD4 for very high security
@@ -834,16 +692,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
    encrypted data. Specifically, assuming that the length in bits of the
    signature S is a multiple of eight, the first bit of the signature
    shall become the most significant bit of the first octet of the
-
-
-
-
-
-Kaliski                      Informational                     [Page 15]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
    encrypted data, and so on through the last bit of the signature,
    which shall become the least significant bit of the last octet of the
    encrypted data.
@@ -890,16 +738,6 @@ RFC 2313                PKCS #1: RSA Encryption               March 1998
      { iso(1) member-body(2) US(840) rsadsi(113549)
          pkcs(1) 1 }
 
-
-
-
-
-
-Kaliski                      Informational                     [Page 16]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
-
    The object identifier rsaEncryption identifies RSA public and private
    keys as defined in Section 7 and the RSA encryption and decryption
    processes defined in Sections 8 and 9.
@@ -945,16 +783,6 @@ Revision history
    Versions 1.0-1.3 were distributed to participants in RSA Data
    Security, Inc.'s Public-Key Cryptography Standards meetings in
    February and March 1991.
-
-
-
-
-
-
-Kaliski                      Informational                     [Page 17]
-
-RFC 2313                PKCS #1: RSA Encryption               March 1998
-
 
    Version 1.4
 
